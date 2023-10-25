@@ -1,0 +1,5 @@
+INSERT INTO genres VALUES
+    (1, 'Science Fiction'),
+    (2, 'Action'),
+    (3, 'Drama'),
+    (4, 'Comedy');
