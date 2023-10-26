@@ -69,17 +69,15 @@ enum class TokenType {
 class Token {
     public:
         Token(TokenType p_type, std::string p_lexeme, OptionalLiteral p_literal, int p_line);
-
         Token(TokenType p_type, const char* p_lexeme, OptionalLiteral p_literal, int p_line);
-
         Token(TokenType p_type, const char* p_lexeme);
 
-        [[nodiscard]] auto toString() const -> std::string;
-        [[nodiscard]] auto getType() const -> TokenType;
-        [[nodiscard]] auto getTypeString() const -> const std::string&;
-        [[nodiscard]] auto getLine() const -> int;
-        [[nodiscard]] auto getLexeme() const -> const std::string&;
-        [[nodiscard]] auto getOptionalLiteral() const -> const OptionalLiteral&;
+        [[nodiscard]] std::string toString() const;
+        [[nodiscard]] TokenType getType() const;
+        [[nodiscard]] const std::string& getTypeString() const;
+        [[nodiscard]] int getLine() const;
+        [[nodiscard]] const std::string& getLexeme() const;
+        [[nodiscard]] const OptionalLiteral& getOptionalLiteral() const;
 
     private:
         const TokenType type;

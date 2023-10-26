@@ -11,10 +11,12 @@
 void interpret(std::string sql) {
     Scanner scanner(sql);
     std::vector<Token> tokenVec = scanner.tokenize();
-    
+
+    // NOTE: testing purposes
     for (int i = 0; i < tokenVec.size(); i++) {
         std::cout<<tokenVec[i].toString()<<std::endl;
     }
+    
     /*
     Parser parser(tokenVec);
     std::vector<AST::StmtPrtVariant> statements = parser.parse();
@@ -25,6 +27,7 @@ void interpret(std::string sql) {
 }
 
 void interface(std::string source) {
+    // TODO print a console title 
     if (source=="REPL") {
         // REPL  
         std::string line;
