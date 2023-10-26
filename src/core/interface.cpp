@@ -1,27 +1,50 @@
-// user interface with teenySQL
+// INTERFACE.CPP: user interface with teenySQL
+
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>  
 
 #include "core.h"
 #include "../compiler/compiler.h"
 
-void interface(std::string s) {
-    if (s.empty()) {
-        // create a REPL
-        std::cout<<"REPL";  
+void interpret(std::string sql) {
+    Scanner scanner(sql);
+    std::vector<Token> tokenVec = scanner.tokenize();
+    
+    for (int i = 0; i < tokenVec.size(); i++) {
+        std::cout<<tokenVec[i].toString()<<std::endl;
+    }
+    /*
+    Parser parser(tokenVec);
+    std::vector<AST::StmtPrtVariant> statements = parser.parse();
+
+    Evaluator evaluator;
+    evaluator.evaluateStmts(statements);
+    */
+}
+
+void interface(std::string source) {
+    if (source=="REPL") {
+        // REPL  
+        std::string line;
+        while (std::cout << "> " && std::getline(std::cin, line)) {
+            interpret(line);
+        }
     }
     else {
-        // read file
-        std::ifstream query("../"+s);
-        std::string sql;
-        if (query.is_open()) {
-            while (query) {
-                std::getline (query, sql);
-                // parse the line. first i need to understand how a SQL compiler works. what are the tokens/groups?
-                std::cout << sql << '\n';
-            }
-        }
+        // read script
+        std::ifstream script("../"+source);
         
-        else {
+        if (!script.good()) {
             std::cout << "ERROR: couldn't open file\n";
+            exit(1);
         }
+
+        std::stringstream buffer;
+        buffer << script.rdbuf();
+        std::string sql = buffer.str();
+
+        interpret(sql);
     }
 }
