@@ -1,3 +1,9 @@
+/*
+    literal types
+        null, booleans, integers, doubles, strings
+        (currently just supports doubles and strings, needs expansion later)
+*/
+
 #pragma once
 
 #include <optional>

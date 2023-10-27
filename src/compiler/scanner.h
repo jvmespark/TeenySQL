@@ -1,3 +1,10 @@
+/*
+    lexical scanner to tokenize inputs
+
+    goes through and matches the code/queries with the associated token
+    returns a vector of the tokens
+*/
+
 #pragma once
 
 #include <list>

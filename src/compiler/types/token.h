@@ -1,3 +1,7 @@
+/*
+    token types
+*/
+
 #pragma once
 
 #include <string>
