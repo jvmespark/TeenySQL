@@ -42,11 +42,12 @@ using InsertStmtPtr = std::unique_ptr<InsertStmt>;
 */
 // expressions
 using ExprPtrVariant = std::variant<LiteralExprPtr>;
+
 ExprPtrVariant createLiteralEPV(OptionalLiteral literal);
 
 // statements
 using StmtPtrVariant = std::variant<InsertStmtPtr>;
-// TODO what do i put in here as params?
+
 StmtPtrVariant createInsertSPV(ExprPtrVariant values);
 
 
@@ -75,6 +76,5 @@ struct InsertStmt final : public Uncopyable {
     */
     ExprPtrVariant values;
 
-    // TODO what do i put in here as params?
     explicit InsertStmt(ExprPtrVariant values);
 };
