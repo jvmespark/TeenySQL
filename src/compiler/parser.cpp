@@ -93,11 +93,14 @@ void Parser::consumeSemicolonOrError() {
 }
 
 std::vector<StmtPtrVariant> Parser::parse() {
-    // TODO
     while (!isEOF()) {
         std::optional<StmtPtrVariant> statement = parseStatement();
         if (statement.has_value()) {
             statements.push_back(std::move(statement.value()));
+        }
+        else {
+            std::cout<<"ERROR: invalid statement"<<std::endl;
+            exit(1);
         }
     }
     return std::move(this->statements);
@@ -113,15 +116,14 @@ std::vector<StmtPtrVariant> Parser::parse() {
 //  statement rules: insert, ...
 // expression
 //  expression rules: primary, ...
-StmtPtrVariant Parser::parseStatement() {
-    StmtPtrVariant res;
-    if (match(TokenType::INSERT)) res = insertStmt();
-    return res;
+std::optional<StmtPtrVariant> Parser::parseStatement() {
+    if (match(TokenType::INSERT)) return insertStmt();
+    return std::nullopt;
 }
 
 StmtPtrVariant Parser::insertStmt() {
     advance();
-    ExprPtrVariant values = parseExpression();
+    ExprPtrVariant values = *std::move(parseExpression());
     consumeSemicolonOrError();
     return createInsertSPV(std::move(values));
 }
@@ -131,10 +133,9 @@ StmtPtrVariant Parser::insertStmt() {
 /*
 ----EXPRESSION RULES
 */
-ExprPtrVariant Parser::parseExpression() {
+std::optional<ExprPtrVariant> Parser::parseExpression() {
     // TODO
     // comma (?)
-    ExprPtrVariant res;
-    if (match(TokenType::NUMBER)) res = consumeOneLiteral();
-    return res;
+    if (match(TokenType::NUMBER)) return consumeOneLiteral();
+    return std::nullopt;
 }

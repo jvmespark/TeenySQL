@@ -32,10 +32,8 @@ void interpret(std::string sql) {
         std::cout<<getLiteralString(v)<<std::endl;
     }   
         
-    /*
     Evaluator evaluator;
-    evaluator.evaluateStmts(statements);
-    */
+    evaluator.evaluateStmts(std::move(statements));
 }
 
 void interface(std::string source) {

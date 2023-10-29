@@ -17,6 +17,7 @@
 #pragma once
 
 #include <vector>
+#include <optional>
 
 #include "./types/literal.h"
 #include "./types/token.h"
@@ -28,13 +29,13 @@ class Parser {
 
         std::vector<StmtPtrVariant> parse();
     private:
-        StmtPtrVariant parseStatement();
+        std::optional<StmtPtrVariant> parseStatement();
 
         // statement parsing
         StmtPtrVariant insertStmt();
 
         // expression parsing
-        ExprPtrVariant parseExpression();
+        std::optional<ExprPtrVariant> parseExpression();
 
         // parser
         Token peek() const;
