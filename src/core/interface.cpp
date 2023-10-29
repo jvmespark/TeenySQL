@@ -2,6 +2,9 @@
 #include <string>
 #include <fstream>
 #include <sstream>  
+#include <vector>
+#include <variant>
+#include <string>
 
 #include "core.h"
 #include "../compiler/compiler.h"
@@ -15,10 +18,21 @@ void interpret(std::string sql) {
         std::cout<<tokenVec[i].toString()<<std::endl;
     }
 
-    /*
     Parser parser(tokenVec);
-    std::vector<AST::StmtPrtVariant> statements = parser.parse();
+    std::vector<StmtPtrVariant> statements = parser.parse();
 
+    // NOTE: testing purposes
+    for (int i = 0; i < statements.size(); i++) {
+        StmtPtrVariant* stmt = &statements[i];
+        // really complicated right now, but thats because this isnt the usual way you would breakdown statements
+        // this would get passed to the evaulator
+        // and based on the variant index it would be switch cased (insert,...)
+        // from there the abstraction gets smaller (hopefully)
+        Literal v = *std::move(std::get<LiteralExprPtr>(std::get<InsertStmtPtr>(*stmt)->values)->literalVal);
+        std::cout<<getLiteralString(v)<<std::endl;
+    }   
+        
+    /*
     Evaluator evaluator;
     evaluator.evaluateStmts(statements);
     */

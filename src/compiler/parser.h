@@ -24,5 +24,33 @@
 
 class Parser {
     public:
+        explicit Parser(const std::vector<Token>& tokens);
+
+        std::vector<StmtPtrVariant> parse();
     private:
-};
+        StmtPtrVariant parseStatement();
+
+        // statement parsing
+        StmtPtrVariant insertStmt();
+
+        // expression parsing
+        ExprPtrVariant parseExpression();
+
+        // parser
+        Token peek() const;
+        bool isEOF() const;
+        Token getTokenAndAdvance();
+        void advance();
+        bool match(TokenType type) const;
+        bool match(const std::initializer_list<TokenType>& types) const;
+        void consumeOrError(TokenType tType, const std::string& errorMessage);
+        void consumeSemicolonOrError();
+
+        ExprPtrVariant consumeOneLiteral();
+        ExprPtrVariant consumeOneLiteral(const std::string& s);
+
+        // data
+        const std::vector<Token>& tokens;
+        std::vector<StmtPtrVariant> statements;
+        std::vector<Token>::const_iterator currentIter;
+};  
