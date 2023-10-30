@@ -12,7 +12,10 @@ const std::string& TokenTypeString(const TokenType value) {
         {TokenType::IDENTIFIER, "IDENTIFIER"},
         {TokenType::STRING, "STRING"},
         {TokenType::NUMBER, "NUMBER"},
-        {TokenType::TQ_EOF, "EOF"}};
+        {TokenType::STAR, "STAR"},
+        {TokenType::SELECT, "SELECT"},
+        {TokenType::TQ_EOF, "EOF"}
+    };
         /*
         {TokenType::LEFT_PAREN, "LEFT_PAREN"},
         {TokenType::RIGHT_PAREN, "RIGHT_PAREN"},

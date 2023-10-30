@@ -118,6 +118,7 @@ std::vector<StmtPtrVariant> Parser::parse() {
 //  expression rules: primary, ...
 std::optional<StmtPtrVariant> Parser::parseStatement() {
     if (match(TokenType::INSERT)) return insertStmt();
+    //TODO if (match(TokenType::SELECT)) return selectStmt();
     return std::nullopt;
 }
 
@@ -128,6 +129,15 @@ StmtPtrVariant Parser::insertStmt() {
     return createInsertSPV(std::move(values));
 }
 
+/*
+StmtPtrVariant Parser::selectStmt() {
+    advance();
+    ExprPtrVariant values = *std::move(parseExpression());
+    consumeSemicolonOrError();
+    return createSelectSPV(std::move(values));
+}
+*/
+
 
 
 /*
@@ -137,5 +147,7 @@ std::optional<ExprPtrVariant> Parser::parseExpression() {
     // TODO
     // comma (?)
     if (match(TokenType::NUMBER)) return consumeOneLiteral();
+    if (match(TokenType::STRING)) return consumeOneLiteral();
+    //TODO if (match(TokenType::STAR)) return consumeOne_____();
     return std::nullopt;
 }

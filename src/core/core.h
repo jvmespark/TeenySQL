@@ -4,5 +4,7 @@
 
 #pragma once
 
-void interpret(std::string sql);
+#include "../engine/btree.h"
+
+void interpret(std::string sql, BTree& btree);
 void interface(std::string source);

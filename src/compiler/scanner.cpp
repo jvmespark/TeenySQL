@@ -21,6 +21,7 @@ bool isAlphaNumeric(char c) {
 TokenType ReservedOrIdentifier(const std::string& str) {
     static const std::map<std::string, TokenType> lookUpTable{
         {"INSERT", TokenType::INSERT},
+        {"SELECT", TokenType::SELECT},
         /*
         {"and", TokenType::AND},       {"class", TokenType::CLASS},
         {"else", TokenType::ELSE},     {"false", TokenType::LOX_FALSE},
@@ -146,6 +147,7 @@ void Scanner::tokenizeOne() {
     advance();
     switch (c) {
         case ';': addToken(TokenType::SEMICOLON); break;
+        case '*': addToken(TokenType::STAR); break;
         /*
         case '(': addToken(TokenType::LEFT_PAREN); break;
         case ')': addToken(TokenType::RIGHT_PAREN); break;

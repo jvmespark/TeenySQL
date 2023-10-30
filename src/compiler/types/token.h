@@ -24,6 +24,7 @@ enum class TokenType {
     STAR,
     */
    SEMICOLON,
+   STAR,
 
     // One or two character tokens.
     /*
@@ -66,6 +67,7 @@ enum class TokenType {
     WHILE,
     */
     INSERT,
+    SELECT,
 
     TQ_EOF
 };

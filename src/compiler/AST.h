@@ -23,7 +23,7 @@ struct LiteralExpr;
 
 // statement
 struct InsertStmt;
-
+//TODO struct SelectStmt;
 
 
 /*
@@ -34,7 +34,7 @@ using LiteralExprPtr = std::unique_ptr<LiteralExpr>;
 
 // statements
 using InsertStmtPtr = std::unique_ptr<InsertStmt>;
-
+//TODO using SelectStmtPtr = std::unique_ptr<SelectStmt>;
 
 
 /*
@@ -47,9 +47,10 @@ ExprPtrVariant createLiteralEPV(OptionalLiteral literal);
 
 // statements
 using StmtPtrVariant = std::variant<InsertStmtPtr>;
+//TODO using StmtPtrVariant = std::variant<InsertStmtPtr, SelectStmtPtr>;
 
 StmtPtrVariant createInsertSPV(ExprPtrVariant values);
-
+//TODO StmtPtrVariant createSelectSPV(ExprPtrVariant values);
 
 
 /*

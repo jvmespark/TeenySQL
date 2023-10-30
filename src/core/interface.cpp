@@ -10,7 +10,7 @@
 #include "../compiler/compiler.h"
 #include "../engine/engine.h"
 
-void interpret(std::string sql) {
+void interpret(std::string sql, BTree& btree) {
     Scanner scanner(sql);
     std::vector<Token> tokenVec = scanner.tokenize();
 
@@ -33,23 +33,24 @@ void interpret(std::string sql) {
         std::cout<<"TESTING: "<<getLiteralString(v)<<std::endl;
     }   
         
-    BTree btree(3);
     Evaluator evaluator(btree);
     evaluator.evaluateStmts(std::move(statements));
 
     // NOTE: testing purposes
     std::cout<<"TESTING: \n";
-    btree.traverse();
+    std::cout<<"CONTENTS OF BTREE: ";btree.traverse();std::cout<<"\n";
 }
 
 void interface(std::string source) {
-    // TODO print a console title 
-    // TODO meta commands
+    BTree btree(3);
+
     if (source=="REPL") {
         // REPL  
+        // TODO print a console title 
+        // TODO meta commands
         std::string line;
         while (std::cout << "> " && std::getline(std::cin, line)) {
-            interpret(line);
+            interpret(line, btree);
         }
     }
     else {
@@ -65,6 +66,6 @@ void interface(std::string source) {
         buffer << script.rdbuf();
         std::string sql = buffer.str();
 
-        interpret(sql);
+        interpret(sql, btree);
     }
 }
