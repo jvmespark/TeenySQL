@@ -2,7 +2,7 @@
     parser to turn scanned tokens into an abstract syntax tree nodetype representation
     top down recursive descent parser implementation
 
-    goes through and logically matches and groups tokens and stores them in a AST pointer type with all necessary information
+    goes through and logically matches and groups tokens and packages all the necessary information to a AST node/block
 
     in parser:
         consume blocks of grouped info and make them into AST node. return a vector of all these ptrs after.

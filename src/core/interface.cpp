@@ -8,6 +8,7 @@
 
 #include "core.h"
 #include "../compiler/compiler.h"
+#include "../engine/engine.h"
 
 void interpret(std::string sql) {
     Scanner scanner(sql);
@@ -15,7 +16,7 @@ void interpret(std::string sql) {
 
     // NOTE: testing purposes
     for (int i = 0; i < tokenVec.size(); i++) {
-        std::cout<<tokenVec[i].toString()<<std::endl;
+        std::cout<<"TESTING: "<<tokenVec[i].toString()<<std::endl;
     }
 
     Parser parser(tokenVec);
@@ -29,11 +30,16 @@ void interpret(std::string sql) {
         // and based on the variant index it would be switch cased (insert,...)
         // from there the abstraction gets smaller (hopefully)
         Literal v = *std::move(std::get<LiteralExprPtr>(std::get<InsertStmtPtr>(*stmt)->values)->literalVal);
-        std::cout<<getLiteralString(v)<<std::endl;
+        std::cout<<"TESTING: "<<getLiteralString(v)<<std::endl;
     }   
         
-    Evaluator evaluator;
+    BTree btree(3);
+    Evaluator evaluator(btree);
     evaluator.evaluateStmts(std::move(statements));
+
+    // NOTE: testing purposes
+    std::cout<<"TESTING: \n";
+    btree.traverse();
 }
 
 void interface(std::string source) {
