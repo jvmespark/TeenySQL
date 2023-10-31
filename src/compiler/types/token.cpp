@@ -13,7 +13,6 @@ const std::string& TokenTypeString(const TokenType value) {
         {TokenType::STRING, "STRING"},
         {TokenType::NUMBER, "NUMBER"},
         {TokenType::STAR, "STAR"},
-        {TokenType::SELECT, "SELECT"},
         {TokenType::TQ_EOF, "EOF"}
     };
         /*

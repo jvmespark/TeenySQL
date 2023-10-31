@@ -18,6 +18,9 @@ void Evaluator::evaluateSingleStmt(const StmtPtrVariant& stmt) {
         case 0: // insert
             evaluateInsert(std::get<0>(stmt));
             break;
+        case 1: // select
+            evaluateSelect(std::get<1>(stmt));
+            break;
         default:
             std::cout<<"ERROR: EVALUATE STATEMENT: expansion limit"<<std::endl; 
             exit(1);
@@ -30,6 +33,14 @@ void Evaluator::evaluateInsert(const InsertStmtPtr& stmt) {
     if (std::get<LiteralExprPtr>(expr)->literalVal.has_value()) {
         Literal value = *std::move(std::get<LiteralExprPtr>(expr)->literalVal);
         btree.insert(value);
+    }
+}
+
+void Evaluator::evaluateSelect(const SelectStmtPtr& stmt) {
+    TokenType selectVal = std::move(stmt->selectVal);
+    if (selectVal == TokenType::STAR) {
+        btree.traverse();
+        std::cout<<"\n";
     }
 }
 

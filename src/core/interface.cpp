@@ -15,13 +15,15 @@ void interpret(std::string sql, BTree& btree) {
     std::vector<Token> tokenVec = scanner.tokenize();
 
     // NOTE: testing purposes
+    /*
     for (int i = 0; i < tokenVec.size(); i++) {
         std::cout<<"TESTING: "<<tokenVec[i].toString()<<std::endl;
     }
+    */
 
     Parser parser(tokenVec);
     std::vector<StmtPtrVariant> statements = parser.parse();
-
+/*
     // NOTE: testing purposes
     for (int i = 0; i < statements.size(); i++) {
         StmtPtrVariant* stmt = &statements[i];
@@ -32,13 +34,13 @@ void interpret(std::string sql, BTree& btree) {
         Literal v = *std::move(std::get<LiteralExprPtr>(std::get<InsertStmtPtr>(*stmt)->values)->literalVal);
         std::cout<<"TESTING: "<<getLiteralString(v)<<std::endl;
     }   
-        
+    */
     Evaluator evaluator(btree);
     evaluator.evaluateStmts(std::move(statements));
 
     // NOTE: testing purposes
-    std::cout<<"TESTING: \n";
-    std::cout<<"CONTENTS OF BTREE: ";btree.traverse();std::cout<<"\n";
+    //std::cout<<"TESTING: \n";
+    //std::cout<<"CONTENTS OF BTREE: ";btree.traverse();std::cout<<"\n";
 }
 
 void interface(std::string source) {

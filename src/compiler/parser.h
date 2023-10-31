@@ -33,6 +33,7 @@ class Parser {
 
         // statement parsing
         StmtPtrVariant insertStmt();
+        StmtPtrVariant selectStmt();
 
         // expression parsing
         std::optional<ExprPtrVariant> parseExpression();

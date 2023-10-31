@@ -17,7 +17,8 @@ LiteralExpr::LiteralExpr(OptionalLiteral value)
 // statements
 InsertStmt::InsertStmt(ExprPtrVariant values)
     : values(std::move(values)) {}
-
+SelectStmt::SelectStmt(TokenType selectVal)
+    : selectVal(std::move(selectVal)) {}
 
 /*
 ---POINTER CREATORS
@@ -30,4 +31,8 @@ ExprPtrVariant createLiteralEPV(OptionalLiteral literal) {
 // statements
 StmtPtrVariant createInsertSPV(ExprPtrVariant values) {
     return std::make_unique<InsertStmt>(std::move(values));
+}
+
+StmtPtrVariant createSelectSPV(TokenType selectVal) {
+    return std::make_unique<SelectStmt>(std::move(selectVal));
 }

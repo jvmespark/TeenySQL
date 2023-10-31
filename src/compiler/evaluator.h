@@ -20,6 +20,7 @@ class Evaluator {
         // what return type(?), do a bit more research
         void evaluateSingleStmt(const StmtPtrVariant& stmt);
         void evaluateInsert(const InsertStmtPtr& stmt);
+        void evaluateSelect(const SelectStmtPtr& stmt);
 
         // evaluate expressions
         //static evaluateLiteralExpr(const LiteralExprPtr& expr);

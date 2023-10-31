@@ -23,7 +23,7 @@ struct LiteralExpr;
 
 // statement
 struct InsertStmt;
-//TODO struct SelectStmt;
+struct SelectStmt;
 
 
 /*
@@ -34,7 +34,7 @@ using LiteralExprPtr = std::unique_ptr<LiteralExpr>;
 
 // statements
 using InsertStmtPtr = std::unique_ptr<InsertStmt>;
-//TODO using SelectStmtPtr = std::unique_ptr<SelectStmt>;
+using SelectStmtPtr = std::unique_ptr<SelectStmt>;
 
 
 /*
@@ -46,11 +46,10 @@ using ExprPtrVariant = std::variant<LiteralExprPtr>;
 ExprPtrVariant createLiteralEPV(OptionalLiteral literal);
 
 // statements
-using StmtPtrVariant = std::variant<InsertStmtPtr>;
-//TODO using StmtPtrVariant = std::variant<InsertStmtPtr, SelectStmtPtr>;
+using StmtPtrVariant = std::variant<InsertStmtPtr, SelectStmtPtr>;
 
 StmtPtrVariant createInsertSPV(ExprPtrVariant values);
-//TODO StmtPtrVariant createSelectSPV(ExprPtrVariant values);
+StmtPtrVariant createSelectSPV(TokenType selectVal);
 
 
 /*
@@ -78,4 +77,10 @@ struct InsertStmt final : public Uncopyable {
     ExprPtrVariant values;
 
     explicit InsertStmt(ExprPtrVariant values);
+};
+
+struct SelectStmt final : public Uncopyable {
+    TokenType selectVal;
+
+    explicit SelectStmt(TokenType selectVal);
 };
