@@ -1,2 +1,7 @@
 *.exe
 *.vscode
+
+# Ignore vim files:
+*~
+*.swp
+*.swo
