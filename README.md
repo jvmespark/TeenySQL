@@ -1,11 +1,10 @@
-features: simple sql compiler, btree, and supports 'insert'.  
-building this in c++
-resources: c_stack, learnDB, sqlLite  
-purpose: to learn the following concepts deeply: hardware persistance, data engineering, high performance c++, compiler technologies
+# teenySQL
+a simple relational database system in under 1000 lines of code
 
-ideas:
-build a simple compiler first
-then build the btree
-implement simple store and retrieves
-would be cool to also build a networking server to send data to a web app via api
-the web app would be a cool visualizer tool for the database
+# Usage
+```bash
+cd build
+make run
+```
+by default teenySQL runs a REPL instance
+you can execute an external SQL query by passing it as an argument
