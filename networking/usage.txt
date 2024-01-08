@@ -1,0 +1,16 @@
+uses wsl/linux
+
+g++ server.cpp -o server
+./server 8080
+
+in another terminal:
+g++ client.cpp -o client
+./client 127.0.0.1 8080
+
+
+idea:
+- create several clustered test nodes
+- each docker container should have its own port and ip address
+- in every sql query, also call the server at end to just send a data dump of entire b-tree to every other node
+- ^ this can likely be optimized to not send everything but for a working model it should suffice
+- a vm and paging system should be made so it persists, or else data would just be deleted after every usage
